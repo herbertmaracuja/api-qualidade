@@ -8,12 +8,12 @@ export class Email {
   }
 
   public static create(email: string): Email {
-    const normalized = email.trim().toLowerCase();
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const normalized = email.trim().toLowerCase();
+  const emailRegex = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
 
-    if (!emailRegex.test(normalized)) {
-      throw new ValidationError("Invalid email format");
-    }
+  if (normalized.length > 254 || !emailRegex.test(normalized)) {
+    throw new ValidationError("Invalid email format");
+  }
 
     return new Email(normalized);
   }
