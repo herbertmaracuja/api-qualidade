@@ -5,18 +5,8 @@ export const openApiDocument = {
     version: "1.0.0",
     description: "API para processamento de transacoes financeiras com arquitetura hexagonal"
   },
-  servers: [
-    {
-      url: "/api",
-      description: "Base path local"
-    }
-  ],
-  tags: [
-    { name: "Users" },
-    { name: "Cards" },
-    { name: "Transactions" },
-    { name: "Invoices" }
-  ],
+  servers: [{ url: "/api", description: "Base path local" }],
+  tags: [{ name: "Users" }, { name: "Cards" }, { name: "Transactions" }, { name: "Invoices" }],
   components: {
     schemas: {
       ErrorResponse: {
@@ -92,10 +82,7 @@ export const openApiDocument = {
           userId: { type: "string" },
           amountCents: { type: "integer" },
           description: { type: "string" },
-          status: {
-            type: "string",
-            enum: ["PENDING", "APPROVED", "DECLINED", "CANCELLED", "CHARGEBACK"]
-          },
+          status: { type: "string", enum: ["PENDING", "APPROVED", "DECLINED", "CANCELLED", "CHARGEBACK"] },
           referenceMonth: { type: "string", example: "2026-03" },
           createdAt: { type: "string", format: "date-time" },
           cancelledAt: { type: "string", format: "date-time", nullable: true },
@@ -123,10 +110,7 @@ export const openApiDocument = {
       post: {
         tags: ["Users"],
         summary: "Criar usuario",
-        requestBody: {
-          required: true,
-          content: { "application/json": { schema: { $ref: "#/components/schemas/CreateUserRequest" } } }
-        },
+        requestBody: { required: true, content: { "application/json": { schema: { $ref: "#/components/schemas/CreateUserRequest" } } } },
         responses: {
           "201": { description: "Usuario criado", content: { "application/json": { schema: { $ref: "#/components/schemas/UserResponse" } } } },
           "400": { description: "Erro de validacao", content: { "application/json": { schema: { $ref: "#/components/schemas/ErrorResponse" } } } }
@@ -137,10 +121,7 @@ export const openApiDocument = {
       post: {
         tags: ["Cards"],
         summary: "Criar cartao",
-        requestBody: {
-          required: true,
-          content: { "application/json": { schema: { $ref: "#/components/schemas/CreateCardRequest" } } }
-        },
+        requestBody: { required: true, content: { "application/json": { schema: { $ref: "#/components/schemas/CreateCardRequest" } } } },
         responses: {
           "201": { description: "Cartao criado", content: { "application/json": { schema: { $ref: "#/components/schemas/CardResponse" } } } },
           "404": { description: "Usuario nao encontrado", content: { "application/json": { schema: { $ref: "#/components/schemas/ErrorResponse" } } } }
@@ -151,10 +132,7 @@ export const openApiDocument = {
       post: {
         tags: ["Transactions"],
         summary: "Processar transacao",
-        requestBody: {
-          required: true,
-          content: { "application/json": { schema: { $ref: "#/components/schemas/ProcessTransactionRequest" } } }
-        },
+        requestBody: { required: true, content: { "application/json": { schema: { $ref: "#/components/schemas/ProcessTransactionRequest" } } } },
         responses: {
           "201": { description: "Transacao processada", content: { "application/json": { schema: { $ref: "#/components/schemas/TransactionResponse" } } } }
         }
